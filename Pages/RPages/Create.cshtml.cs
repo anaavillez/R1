@@ -14,14 +14,20 @@ namespace R1.Pages
     public class CreateModel : PageModel
     {
         private readonly R1.Data.R1DbContext _context;
+        private readonly IHtmlHelper htmlHelper;
+       
 
-        public CreateModel(R1.Data.R1DbContext context)
+        public IEnumerable<SelectListItem> Cuisines { get; set; }
+
+        public CreateModel(R1.Data.R1DbContext context, IHtmlHelper htmlHelper)
         {
             _context = context;
+            this.htmlHelper = htmlHelper;
         }
 
         public IActionResult OnGet()
         {
+            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
             return Page();
         }
 
@@ -35,11 +41,13 @@ namespace R1.Pages
             {
                 return Page();
             }
+            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
+
 
             _context.Restaurants.Add(Restaurant);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
 }

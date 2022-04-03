@@ -15,12 +15,15 @@ namespace R1.Pages
     public class EditModel : PageModel
     {
         private readonly R1.Data.R1DbContext _context;
+        private readonly IHtmlHelper htmlHelper;
 
-        public EditModel(R1.Data.R1DbContext context)
+        public EditModel(R1.Data.R1DbContext context, IHtmlHelper htmlHelper)
         {
             _context = context;
+            this.htmlHelper = htmlHelper;
         }
-
+        public IEnumerable<SelectListItem> Cuisines { get; set; }
+        
         [BindProperty]
         public Restaurant Restaurant { get; set; }
 
@@ -30,6 +33,7 @@ namespace R1.Pages
             {
                 return NotFound();
             }
+            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
 
             Restaurant = await _context.Restaurants.FirstOrDefaultAsync(m => m.Id == id);
 
@@ -48,6 +52,7 @@ namespace R1.Pages
             {
                 return Page();
             }
+            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
 
             _context.Attach(Restaurant).State = EntityState.Modified;
 
@@ -67,7 +72,7 @@ namespace R1.Pages
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
 
         private bool RestaurantExists(int id)
