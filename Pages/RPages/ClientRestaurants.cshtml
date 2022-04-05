@@ -1,0 +1,46 @@
+﻿@page
+@model R1.Pages.RPages.ClientRestaurantsModel
+@{
+    ViewData["Title"] = "ClientRestaurants";
+}
+
+<h2>Client Restaurants</h2>
+
+<table class="table" id="restaurants"></table>
+
+@section Scripts {
+
+    <environment include="Development">
+        <script src="~/node_modules/datatables.net/jquery.dataTables.js"></script>
+        <link src="~/node_modules/datatables.net-dt/js/dataTables.dataTables.js" />
+        <script src="~/node_modules/datatables.net-dt/jquery.dataTables.css"></script>
+    
+
+    </environment>
+
+    <environment exclude="Development"><!--data table link only for this page-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+    </environment>
+
+    
+
+
+    <script>
+
+        $(function (){
+            $.ajax("../api/restaurants/",
+            {method: "get"}).then(function(response){
+                $("#restaurants").dataTable({
+                    data: response,
+                    column:[
+                        {"data":"name"},
+                        {"data":"location"},
+                        {"data":"cuisine"}
+                    ]
+                });
+            });
+        });
+    </script>
+}

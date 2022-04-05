@@ -1,0 +1,27 @@
+{
+  "name": "r1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anaavillez/R1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anaavillez/R1/issues"
+  },
+  "homepage": "https://github.com/anaavillez/R1#readme",
+  "dependencies": {
+    "@types/jquery": "^3.5.14",
+    "datatables.net-dt": "^1.11.5",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23"
+  }
+}

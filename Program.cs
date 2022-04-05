@@ -1,4 +1,6 @@
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using R1.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,13 +24,24 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllers();
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
+app.UseNodeModules();
+app.UseCookiePolicy();
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapRazorPages();
-
 app.Run();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath,"node_modules")),
+    RequestPath = "/node_modules"
+});
+
