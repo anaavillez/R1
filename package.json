@@ -19,7 +19,8 @@
   "dependencies": {
     "@types/jquery": "^3.5.14",
     "datatables.net-dt": "^1.11.5",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "tds": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.23"

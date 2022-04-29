@@ -38,6 +38,16 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.Run();
 
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath,"Static")),
+    RequestPath = "/Static"
+});
+
+
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
